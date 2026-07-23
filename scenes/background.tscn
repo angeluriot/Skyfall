@@ -1,5 +1,7 @@
 [gd_scene format=3 uid="uid://brttwucoij5jk"]
 
+[ext_resource type="Script" uid="uid://dv5orjxs2sbam" path="res://scripts/background.gd" id="1_bkp1e"]
+
 [sub_resource type="Gradient" id="Gradient_o5a4c"]
 colors = PackedColorArray(0.02745098, 0.5372549, 0.94509804, 1, 0.02745098, 0.5372549, 0.94509804, 1)
 
@@ -11,21 +13,28 @@ colors = PackedColorArray(0.15281478, 0.5103441, 0.2975485, 1, 0.15294118, 0.509
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_iiimo"]
 gradient = SubResource("Gradient_bkp1e")
+width = 700
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tevxt"]
-size = Vector2(778, 104)
+size = Vector2(700, 250)
 
 [node name="Background" type="Node2D" unique_id=1909775996]
+script = ExtResource("1_bkp1e")
+stop_y = 250.0
 
 [node name="Sky" type="Sprite2D" parent="." unique_id=135810928]
 scale = Vector2(2.3203125, 590.00006)
 texture = SubResource("GradientTexture1D_tevxt")
 
-[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=872780162]
+[node name="Ground" type="AnimatableBody2D" parent="." unique_id=642371664]
+collision_layer = 32
+collision_mask = 13
 
-[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D" unique_id=308804341]
-scale = Vector2(3.0390625, 104)
+[node name="Sprite2D" type="Sprite2D" parent="Ground" unique_id=1643987101]
+position = Vector2(0, 125)
+scale = Vector2(1, 250)
 texture = SubResource("GradientTexture1D_iiimo")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=957429402]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ground" unique_id=1572776411]
+position = Vector2(0, 125)
 shape = SubResource("RectangleShape2D_tevxt")

@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://bwu86y8ja438"]
 
+[ext_resource type="Script" uid="uid://c2g2vo0y0f3cf" path="res://scripts/level.gd" id="1_2r41h"]
 [ext_resource type="PackedScene" uid="uid://brttwucoij5jk" path="res://scenes/background.tscn" id="1_ppgk2"]
 [ext_resource type="PackedScene" uid="uid://bnfsdaqbhy6e7" path="res://scenes/player.tscn" id="2_w7c3h"]
 [ext_resource type="PackedScene" uid="uid://cw01rpj4od62c" path="res://scenes/foreground.tscn" id="3_mx8sn"]
@@ -21,7 +22,14 @@ distance = -250.0
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_d0u6y"]
 distance = -250.0
 
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_2r41h"]
+resource_local_to_scene = true
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_klq6b"]
+resource_local_to_scene = true
+
 [node name="Level" type="Node2D" unique_id=494716899]
+script = ExtResource("1_2r41h")
 metadata/_edit_vertical_guides_ = [-250.0, 250.0]
 metadata/_edit_horizontal_guides_ = [-250.0, 250.0]
 
@@ -52,9 +60,15 @@ unique_name_in_owner = true
 
 [node name="Ball" parent="Entities/Objects/Soft" unique_id=169278402 instance=ExtResource("3_w8frs")]
 position = Vector2(67, 43)
+physics_material_override = SubResource("PhysicsMaterial_2r41h")
 
 [node name="Ball2" parent="Entities/Objects/Soft" unique_id=1855154834 instance=ExtResource("3_w8frs")]
-position = Vector2(87, -33)
+position = Vector2(138, -51)
+physics_material_override = SubResource("PhysicsMaterial_klq6b")
+
+[node name="Hard" type="Node2D" parent="Entities/Objects" unique_id=66899177]
+
+[node name="People" type="Node2D" parent="Entities" unique_id=444954295]
 
 [node name="Player" parent="." unique_id=292713720 instance=ExtResource("2_w7c3h")]
 unique_name_in_owner = true

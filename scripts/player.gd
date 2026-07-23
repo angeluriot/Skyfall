@@ -19,6 +19,11 @@ var safe := false
 @onready var animated_sprite := $AnimatedSprite2D as AnimatedSprite2D
 @onready var grab_area := $Area2D as Area2D
 @onready var soft_objects_countainer := %Entities/Objects/Soft as Node2D
+@onready var camera := $Camera2D as Camera2D
+
+
+func _ready() -> void:
+	Global.fall_ended.connect(_on_fall_ended)
 
 
 func _physics_process(delta: float) -> void:
@@ -31,9 +36,14 @@ func _physics_process(delta: float) -> void:
 
 	move_and_slide()
 
-	fix_velocity()
+	#fix_velocity()
 	follow(delta)
 	update_outline()
+
+
+func _on_fall_ended() -> void:
+	camera.limit_bottom = 280
+	velocity = Vector2(0.0, Global.speed * Global.PIXEL_PER_METER)
 
 
 func turn(direction: Vector2) -> void:
@@ -105,7 +115,7 @@ func follow(delta: float) -> void:
 func fix_velocity() -> void:
 	for index in range(get_slide_collision_count()):
 		var collision := get_slide_collision(index)
-		if not selected_entities.has(collision.get_collider()):
+		if not (collision.get_collider() is RigidBody2D and selected_entities.has(collision.get_collider())):
 			velocity = velocity.slide(collision.get_normal())
 
 
@@ -139,4 +149,4 @@ func select_entity(entity: RigidBody2D) -> void:
 func deselect_entity(entity: RigidBody2D) -> void:
 	(entity.get_node('Sprite2D') as Sprite2D).material.set_shader_parameter("outline_width", 0.0)
 	entity.selected = false
-	entity.rotation_speed = randf_range(-entity.max_rotation_speed, entity.max_rotation_speed)
+	entity.rotation_speed = randf_range(-entity.max_default_rotation_speed, entity.max_default_rotation_speed)
