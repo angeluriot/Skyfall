@@ -1,24 +1,14 @@
 extends RigidBody2D
 
 
-var grabbed_by: Player = null
+var selected: bool = false
+
+@export var min_rotation_speed: float;
+@export var max_rotation_speed: float;
+
+@onready var rotation_speed: float = Utils.get_rotation_speed(min_rotation_speed, max_rotation_speed)
 
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _physics_process(delta: float) -> void:
-	if not grabbed_by:
-		global_rotation += 0.5 * delta
-
-
-func select(player: Player) -> void:
-	($Sprite2D as Sprite2D).material.set_shader_parameter("outline_width", 1.0)
-	grabbed_by = player
-
-func deselect() -> void:
-	($Sprite2D as Sprite2D).material.set_shader_parameter("outline_width", 0.0)
-	grabbed_by = null
+func _physics_process(_delta: float) -> void:
+	if not selected:
+		apply_torque(rotation_speed)

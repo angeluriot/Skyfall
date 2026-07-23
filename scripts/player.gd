@@ -2,16 +2,21 @@ extends CharacterBody2D
 class_name Player
 
 
+var reachable_entities: Array[RigidBody2D] = []
+var selected_entities: Array[RigidBody2D] = []
+var selected_offset: Dictionary[RigidBody2D, Vector2] = {}
+var selected_repel: Dictionary[RigidBody2D, Vector2] = {}
+var safe := false
+
 @export var max_speed: float;
 @export var acceleration: float;
 @export var friction: float;
 @export var push_force: float;
+@export var grab_min_repel: float;
+@export var grab_max_repel: float;
 
-const BLOCKED_THRESHOLD := 1.0
-
-var reachable_objects: Array[RigidBody2D] = []
-var selected_objects: Array[RigidBody2D] = []
-var grab_offsets: Dictionary = {}
+@onready var animated_sprite := $AnimatedSprite2D as AnimatedSprite2D
+@onready var soft_objects_countainer := %Entities/Objects/Soft as Node2D
 
 
 func _physics_process(delta: float) -> void:
@@ -29,65 +34,87 @@ func _physics_process(delta: float) -> void:
 		)
 
 	grab()
-	hold()
 	push(direction)
 	move_and_slide()
-	drive_selected(delta)
+	fix_velocity()
+	follow(delta)
+	update_outline()
+
+
+func grab() -> void:
+	if Input.is_action_just_pressed('grab'):
+		for entity in reachable_entities:
+			select_entity(entity)
+			selected_entities.append(entity)
+			selected_offset[entity] = entity.global_position - global_position
+			selected_repel[entity] = Vector2.ZERO
+
+	elif Input.is_action_just_released('grab'):
+		for entity in selected_entities:
+			deselect_entity(entity)
+		selected_entities.clear()
+		selected_offset.clear()
+		selected_repel.clear()
 
 
 func push(direction: Vector2) -> void:
 	for index in range(get_slide_collision_count()):
 		var collision := get_slide_collision(index)
-		var object := collision.get_collider()
+		var entity := collision.get_collider()
 
-		if object is RigidBody2D:
-			var rigid_body := object as RigidBody2D
+		if entity is RigidBody2D:
+			var rigid_body := entity as RigidBody2D
 			var push_direction := -collision.get_normal()
 
-			if direction.dot(push_direction) > 0.0:
+			if rigid_body in selected_entities:
+				selected_repel[rigid_body] -= push_direction * grab_min_repel
+				if selected_repel[rigid_body].length() > grab_max_repel:
+					selected_repel[rigid_body] = selected_repel[rigid_body].normalized() * grab_max_repel
+			elif direction.dot(push_direction) > 0.0:
 				rigid_body.apply_central_force(push_direction * push_force)
 
 
-func grab() -> void:
-	if Input.is_action_just_pressed('grab'):
-		for object in reachable_objects:
-			if selected_objects.has(object):
-				continue
-
-			selected_objects.append(object)
-			grab_offsets[object] = object.global_position - global_position
-			add_collision_exception_with(object)
-			object.select(self)
-
-	elif Input.is_action_just_released('grab'):
-		for object in selected_objects:
-			remove_collision_exception_with(object)
-			object.deselect()
-		selected_objects.clear()
-		grab_offsets.clear()
+func follow(delta: float) -> void:
+	for entity in selected_entities:
+		var target := global_position + selected_offset[entity] + selected_repel[entity]
+		entity.linear_velocity = (target - entity.global_position) / delta
 
 
-func hold() -> void:
-	for object in selected_objects:
-		var offset: Vector2 = grab_offsets[object]
-		var desired := object.global_position - offset
-		var correction := desired - global_position
-
-		if correction.length() > BLOCKED_THRESHOLD:
-			global_position = desired
-			velocity = velocity.slide(correction.normalized())
+func fix_velocity() -> void:
+	for index in range(get_slide_collision_count()):
+		var collision := get_slide_collision(index)
+		if not selected_entities.has(collision.get_collider()):
+			velocity = velocity.slide(collision.get_normal())
 
 
-func drive_selected(delta: float) -> void:
-	for object in selected_objects:
-		var offset: Vector2 = grab_offsets[object]
-		var target := global_position + offset
-		object.linear_velocity = (target - object.global_position) / delta
+func update_outline() -> void:
+	var old_safe = safe
+	var soft_objects: Array[RigidBody2D] = []
+	soft_objects.assign(soft_objects_countainer.get_children())
+	safe = Utils.is_person_safe(self, soft_objects, [])
+
+	if safe != old_safe:
+		animated_sprite.material.set_shader_parameter(
+			'outline_width',
+			1.0 if safe else 0.0
+		)
 
 
 func _on_area_2d_body_entered(body: RigidBody2D) -> void:
-	reachable_objects.append(body)
+	reachable_entities.append(body)
 
 
 func _on_area_2d_body_exited(body: RigidBody2D) -> void:
-	reachable_objects.erase(body)
+	reachable_entities.erase(body)
+
+
+func select_entity(entity: RigidBody2D) -> void:
+	(entity.get_node('Sprite2D') as Sprite2D).material.set_shader_parameter("outline_width", 1.0)
+	entity.selected = true
+	entity.angular_velocity = 0.0
+
+
+func deselect_entity(entity: RigidBody2D) -> void:
+	(entity.get_node('Sprite2D') as Sprite2D).material.set_shader_parameter("outline_width", 0.0)
+	entity.selected = false
+	entity.rotation_speed = randf_range(-entity.max_rotation_speed, entity.max_rotation_speed)
