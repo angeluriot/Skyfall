@@ -1,0 +1,97 @@
+[gd_scene format=3 uid="uid://bwu86y8ja438"]
+
+[ext_resource type="PackedScene" uid="uid://bnfsdaqbhy6e7" path="res://scenes/player.tscn" id="2_w7c3h"]
+[ext_resource type="Texture2D" uid="uid://orw1gr8y76yg" path="res://assets/graphics/particles/speed.png" id="2_w8frs"]
+[ext_resource type="PackedScene" uid="uid://jyvptelm8kun" path="res://scenes/objects/ball.tscn" id="3_w8frs"]
+[ext_resource type="Texture2D" uid="uid://dxwvu5mdehwqj" path="res://icon.svg" id="4_mx8sn"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_g4v7s"]
+normal = Vector2(1, 0)
+distance = -250.0
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_yf5fn"]
+normal = Vector2(-1, 0)
+distance = -250.0
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_57qmd"]
+normal = Vector2(0, 1)
+distance = -250.0
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_d0u6y"]
+distance = -250.0
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_mx8sn"]
+particles_animation = true
+particles_anim_h_frames = 4
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Gradient" id="Gradient_ppgk2"]
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 0.78431374)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_2gfar"]
+gradient = SubResource("Gradient_ppgk2")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_2r41h"]
+particle_flag_disable_z = true
+emission_shape_offset = Vector3(0, 270, 0)
+emission_shape_scale = Vector3(270, 1, 1)
+emission_shape = 3
+emission_box_extents = Vector3(1, 1, 1)
+direction = Vector3(0, -1, 0)
+spread = 0.0
+initial_velocity_min = 200.0
+initial_velocity_max = 250.0
+gravity = Vector3(0, 0, 0)
+linear_accel_min = -2.2351742e-06
+linear_accel_max = -2.2351742e-06
+attractor_interaction_enabled = false
+color_initial_ramp = SubResource("GradientTexture1D_2gfar")
+anim_offset_max = 1.0
+
+[node name="Level" type="Node2D" unique_id=494716899]
+metadata/_edit_vertical_guides_ = [-250.0, 250.0]
+metadata/_edit_horizontal_guides_ = [-250.0, 250.0]
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=339197595]
+offset_left = -295.0
+offset_top = -286.0
+offset_right = 292.0
+offset_bottom = 293.0
+color = Color(0, 0.6431373, 1, 1)
+
+[node name="Player" parent="." unique_id=292713720 instance=ExtResource("2_w7c3h")]
+
+[node name="Boundaries" type="StaticBody2D" parent="." unique_id=1964217392]
+collision_layer = 16
+collision_mask = 13
+
+[node name="CollisionShape2D1" type="CollisionShape2D" parent="Boundaries" unique_id=1876170410]
+shape = SubResource("WorldBoundaryShape2D_g4v7s")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Boundaries" unique_id=1036487159]
+shape = SubResource("WorldBoundaryShape2D_yf5fn")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Boundaries" unique_id=1293443050]
+shape = SubResource("WorldBoundaryShape2D_57qmd")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="Boundaries" unique_id=524056229]
+shape = SubResource("WorldBoundaryShape2D_d0u6y")
+
+[node name="Foreground" type="GPUParticles2D" parent="." unique_id=1879070400]
+material = SubResource("CanvasItemMaterial_mx8sn")
+amount = 100
+texture = ExtResource("2_w8frs")
+lifetime = 3.0
+process_material = SubResource("ParticleProcessMaterial_2r41h")
+metadata/_edit_lock_ = true
+
+[node name="Ball" parent="." unique_id=169278402 instance=ExtResource("3_w8frs")]
+position = Vector2(67, 43)
+
+[node name="Ball2" parent="." unique_id=1855154834 instance=ExtResource("3_w8frs")]
+position = Vector2(87, -33)
+
+[node name="Icon" type="Sprite2D" parent="." unique_id=2004695337]
+position = Vector2(112, 134)
+texture = ExtResource("4_mx8sn")

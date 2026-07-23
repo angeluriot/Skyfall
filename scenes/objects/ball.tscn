@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://jyvptelm8kun"]
+
+[ext_resource type="Script" uid="uid://dqoe5d1iub1x" path="res://scripts/ball.gd" id="1_12lam"]
+[ext_resource type="Texture2D" uid="uid://dwldjisfq2jps" path="res://assets/graphics/objects/ball.png" id="1_itkb2"]
+[ext_resource type="Shader" uid="uid://d0japmm85m7wl" path="res://shaders/outline.gdshader" id="2_aaoto"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_g2els"]
+resource_local_to_scene = true
+shader = ExtResource("2_aaoto")
+shader_parameter/outline_color = Color(1, 1, 1, 1)
+shader_parameter/outline_width = 0.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_g4v7s"]
+radius = 23.086792
+
+[node name="Ball" type="RigidBody2D" unique_id=169278402]
+collision_layer = 4
+collision_mask = 63
+gravity_scale = 0.0
+script = ExtResource("1_12lam")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=493148785]
+material = SubResource("ShaderMaterial_g2els")
+texture = ExtResource("1_itkb2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1396514910]
+shape = SubResource("CircleShape2D_g4v7s")

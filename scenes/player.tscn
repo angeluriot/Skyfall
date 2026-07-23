@@ -1,0 +1,101 @@
+[gd_scene format=3 uid="uid://bnfsdaqbhy6e7"]
+
+[ext_resource type="Texture2D" uid="uid://b2axp7vpssm3" path="res://assets/graphics/characters/player/Swim.png" id="1_3vyb7"]
+[ext_resource type="Script" uid="uid://b4mlf7jnxgll4" path="res://scripts/player.gd" id="1_qhqgy"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g2els"]
+atlas = ExtResource("1_3vyb7")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qhqgy"]
+atlas = ExtResource("1_3vyb7")
+region = Rect2(48, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dqkch"]
+atlas = ExtResource("1_3vyb7")
+region = Rect2(96, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qlg0r"]
+atlas = ExtResource("1_3vyb7")
+region = Rect2(144, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tuyoq"]
+atlas = ExtResource("1_3vyb7")
+region = Rect2(192, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fjrip"]
+atlas = ExtResource("1_3vyb7")
+region = Rect2(240, 0, 48, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_g4v7s"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g2els")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qhqgy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dqkch")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qlg0r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tuyoq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fjrip")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_g4v7s"]
+radius = 6.0
+height = 28.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_yf5fn"]
+radius = 16.0
+height = 42.0
+
+[node name="Player" type="CharacterBody2D" unique_id=292713720]
+collision_mask = 60
+script = ExtResource("1_qhqgy")
+max_speed = 120.0
+acceleration = 70.0
+friction = 30.0
+push_force = 500.0
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1076215595]
+position = Vector2(4, -4)
+sprite_frames = SubResource("SpriteFrames_g4v7s")
+autoplay = "default"
+frame_progress = 0.8256385
+speed_scale = 1.5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=61753676]
+rotation = -1.5707964
+shape = SubResource("CapsuleShape2D_g4v7s")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1386523113]
+limit_left = -260
+limit_top = -260
+limit_right = 260
+limit_bottom = 260
+position_smoothing_enabled = true
+position_smoothing_speed = 1.0
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1074784558]
+collision_layer = 2
+collision_mask = 12
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1569520716]
+position = Vector2(9, 0)
+rotation = -1.5707964
+shape = SubResource("CapsuleShape2D_yf5fn")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
