@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://bwu86y8ja438"]
 
+[ext_resource type="PackedScene" uid="uid://brttwucoij5jk" path="res://scenes/background.tscn" id="1_ppgk2"]
 [ext_resource type="PackedScene" uid="uid://bnfsdaqbhy6e7" path="res://scenes/player.tscn" id="2_w7c3h"]
 [ext_resource type="PackedScene" uid="uid://cw01rpj4od62c" path="res://scenes/foreground.tscn" id="3_mx8sn"]
 [ext_resource type="PackedScene" uid="uid://jyvptelm8kun" path="res://scenes/objects/ball.tscn" id="3_w8frs"]
@@ -24,12 +25,7 @@ distance = -250.0
 metadata/_edit_vertical_guides_ = [-250.0, 250.0]
 metadata/_edit_horizontal_guides_ = [-250.0, 250.0]
 
-[node name="ColorRect" type="ColorRect" parent="." unique_id=339197595]
-offset_left = -295.0
-offset_top = -286.0
-offset_right = 292.0
-offset_bottom = 293.0
-color = Color(0, 0.6431373, 1, 1)
+[node name="Background" parent="." unique_id=1909775996 instance=ExtResource("1_ppgk2")]
 
 [node name="Boundaries" type="StaticBody2D" parent="." unique_id=1964217392]
 collision_layer = 16

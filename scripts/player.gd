@@ -2,6 +2,7 @@ extends CharacterBody2D
 class_name Player
 
 
+var is_to_the_left: bool = false
 var reachable_entities: Array[RigidBody2D] = []
 var selected_entities: Array[RigidBody2D] = []
 var selected_offset: Dictionary[RigidBody2D, Vector2] = {}
@@ -16,12 +17,40 @@ var safe := false
 @export var grab_max_repel: float;
 
 @onready var animated_sprite := $AnimatedSprite2D as AnimatedSprite2D
+@onready var grab_area := $Area2D as Area2D
 @onready var soft_objects_countainer := %Entities/Objects/Soft as Node2D
 
 
 func _physics_process(delta: float) -> void:
 	var direction := Input.get_vector('left','right','up','down')
 
+	turn(direction)
+	move(direction, delta)
+	grab()
+	push(direction)
+
+	move_and_slide()
+
+	fix_velocity()
+	follow(delta)
+	update_outline()
+
+
+func turn(direction: Vector2) -> void:
+	if not is_to_the_left and direction.x < 0.0 and selected_entities.is_empty():
+		animated_sprite.flip_h = true
+		animated_sprite.position.x = -animated_sprite.position.x
+		grab_area.position.x = -grab_area.position.x
+		is_to_the_left = true
+
+	if is_to_the_left and direction.x > 0.0 and selected_entities.is_empty():
+		animated_sprite.flip_h = false
+		animated_sprite.position.x = -animated_sprite.position.x
+		grab_area.position.x = -grab_area.position.x
+		is_to_the_left = false
+
+
+func move(direction: Vector2, delta: float) -> void:
 	if direction != Vector2.ZERO:
 		velocity = velocity.move_toward(
 			direction * max_speed,
@@ -32,13 +61,6 @@ func _physics_process(delta: float) -> void:
 			Vector2.ZERO,
 			friction * delta
 		)
-
-	grab()
-	push(direction)
-	move_and_slide()
-	fix_velocity()
-	follow(delta)
-	update_outline()
 
 
 func grab() -> void:
