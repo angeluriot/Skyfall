@@ -1,0 +1,40 @@
+[gd_scene format=3 uid="uid://74yaierlx7m5"]
+
+[ext_resource type="FontFile" uid="uid://g8kctou6mb6b" path="res://assets/fonts/upheavtt.ttf" id="1_tg63u"]
+[ext_resource type="Script" uid="uid://du08otdquni3e" path="res://scenes/altimeter.gd" id="1_vgbvo"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_4vfji"]
+font = ExtResource("1_tg63u")
+font_size = 20
+shadow_size = 0
+shadow_color = Color(0, 0, 0.34509805, 0.2509804)
+shadow_offset = Vector2(0, 2)
+
+[node name="Altimeter" type="CanvasLayer" unique_id=480564093]
+script = ExtResource("1_vgbvo")
+initial_altitude = 3000
+speed = 300.0
+
+[node name="Control" type="Control" parent="." unique_id=1682690403]
+layout_mode = 3
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 40.0
+grow_horizontal = 2
+
+[node name="Label" type="Label" parent="Control" unique_id=228649442]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -51.0
+offset_right = 51.0
+offset_bottom = 23.0
+grow_horizontal = 2
+text = "20,000m"
+label_settings = SubResource("LabelSettings_4vfji")
+horizontal_alignment = 1
+vertical_alignment = 1

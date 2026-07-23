@@ -67,7 +67,7 @@ func push(direction: Vector2) -> void:
 			var push_direction := -collision.get_normal()
 
 			if rigid_body in selected_entities:
-				selected_repel[rigid_body] -= push_direction * grab_min_repel
+				selected_repel[rigid_body] += push_direction * grab_min_repel
 				if selected_repel[rigid_body].length() > grab_max_repel:
 					selected_repel[rigid_body] = selected_repel[rigid_body].normalized() * grab_max_repel
 			elif direction.dot(push_direction) > 0.0:
