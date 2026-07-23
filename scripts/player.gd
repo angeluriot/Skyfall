@@ -27,6 +27,8 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
+	camera.position_smoothing_speed = 1.0 + (1.0 - Utils.ratio(Global.altitude, 0, 300)) * 10.0
+
 	var direction := Input.get_vector('left','right','up','down')
 
 	turn(direction)
@@ -36,14 +38,15 @@ func _physics_process(delta: float) -> void:
 
 	move_and_slide()
 
-	#fix_velocity()
+	if not Global.has_fall_ended:
+		fix_velocity()
+
 	follow(delta)
 	update_outline()
 
 
 func _on_fall_ended() -> void:
-	camera.limit_bottom = 280
-	velocity = Vector2(0.0, Global.speed * Global.PIXEL_PER_METER)
+	velocity.y = Global.speed * Global.PIXEL_PER_METER
 
 
 func turn(direction: Vector2) -> void:
@@ -71,6 +74,9 @@ func move(direction: Vector2, delta: float) -> void:
 			Vector2.ZERO,
 			friction * delta
 		)
+
+	if Global.has_fall_ended:
+		velocity.y += ProjectSettings.get_setting('physics/2d/default_gravity') * delta
 
 
 func grab() -> void:

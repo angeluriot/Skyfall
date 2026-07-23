@@ -21,7 +21,7 @@ func _physics_process(_delta: float) -> void:
 
 
 func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
-	if state.linear_velocity.length() > max_speed:
+	if not Global.has_fall_ended and state.linear_velocity.length() > max_speed:
 		state.linear_velocity = state.linear_velocity.normalized() * max_speed
 
 	state.angular_velocity = clamp(state.angular_velocity, -max_angular_speed, max_angular_speed)
@@ -29,3 +29,5 @@ func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 
 func _on_fall_ended() -> void:
 	physics_material_override.bounce = 0.5
+	gravity_scale = 1.0
+	linear_velocity.y = Global.speed * Global.PIXEL_PER_METER

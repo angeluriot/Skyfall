@@ -1,6 +1,10 @@
 extends Node
 
 
+func ratio(value: float, value_min: float, value_max: float) -> float:
+	return min(max((value - value_min) / (value_max - value_min), 0.0), 1.0)
+
+
 func get_circle_global_x_bounds(collision: CollisionShape2D) -> Vector2:
 	var circle := collision.shape as CircleShape2D
 	assert(circle != null)

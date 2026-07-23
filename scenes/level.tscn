@@ -39,16 +39,16 @@ metadata/_edit_horizontal_guides_ = [-250.0, 250.0]
 collision_layer = 16
 collision_mask = 13
 
-[node name="CollisionShape2D1" type="CollisionShape2D" parent="Boundaries" unique_id=1876170410]
+[node name="Left" type="CollisionShape2D" parent="Boundaries" unique_id=1876170410]
 shape = SubResource("WorldBoundaryShape2D_g4v7s")
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="Boundaries" unique_id=1036487159]
+[node name="Right" type="CollisionShape2D" parent="Boundaries" unique_id=1036487159]
 shape = SubResource("WorldBoundaryShape2D_yf5fn")
 
-[node name="CollisionShape2D3" type="CollisionShape2D" parent="Boundaries" unique_id=1293443050]
+[node name="Top" type="CollisionShape2D" parent="Boundaries" unique_id=1293443050]
 shape = SubResource("WorldBoundaryShape2D_57qmd")
 
-[node name="CollisionShape2D4" type="CollisionShape2D" parent="Boundaries" unique_id=524056229]
+[node name="Bottom" type="CollisionShape2D" parent="Boundaries" unique_id=524056229]
 shape = SubResource("WorldBoundaryShape2D_d0u6y")
 
 [node name="Entities" type="Node2D" parent="." unique_id=409501570]

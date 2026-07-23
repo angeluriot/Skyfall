@@ -6,7 +6,7 @@ const PIXEL_PER_METER: float = 3.0
 
 var altitude: float = 2000.0
 var speed: float = 300.0
-var fallen: bool = false
+var has_fall_ended: bool = false
 
 
 func _ready() -> void:
@@ -14,10 +14,10 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
-	if not fallen and altitude - speed * delta <= 0.0:
+	if not has_fall_ended and altitude - speed * delta <= 0:
 		altitude = 0.0
-		fallen = true
+		has_fall_ended = true
 		emit_signal('fall_ended')
 
-	if not fallen:
+	if not has_fall_ended:
 		altitude -= speed * delta
