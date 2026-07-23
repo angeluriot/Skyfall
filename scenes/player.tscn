@@ -62,7 +62,6 @@ animations = [{
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_g4v7s"]
 radius = 6.0
-height = 28.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_yf5fn"]
 radius = 16.0
@@ -81,6 +80,8 @@ push_force = 300.0
 grab_min_repel = 1.5
 grab_max_repel = 5.0
 
+[node name="Marker2D" type="Marker2D" parent="." unique_id=639482745]
+
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1076215595]
 material = SubResource("ShaderMaterial_w8frs")
 position = Vector2(4, -4)
@@ -98,8 +99,6 @@ limit_left = -260
 limit_top = -260
 limit_right = 260
 limit_bottom = 260
-limit_smoothed = true
-position_smoothing_enabled = true
 position_smoothing_speed = 1.0
 
 [node name="Area2D" type="Area2D" parent="." unique_id=1074784558]

@@ -2,7 +2,7 @@ extends Node
 
 signal fall_ended
 
-const PIXEL_PER_METER: float = 3.0
+const PIXEL_PER_METER: float = 2.0
 
 var altitude: float = 2000.0
 var speed: float = 300.0

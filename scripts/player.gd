@@ -27,8 +27,6 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
-	camera.position_smoothing_speed = 1.0 + (1.0 - Utils.ratio(Global.altitude, 0, 300)) * 10.0
-
 	var direction := Input.get_vector('left','right','up','down')
 
 	turn(direction)
@@ -46,7 +44,23 @@ func _physics_process(delta: float) -> void:
 
 
 func _on_fall_ended() -> void:
-	velocity.y = Global.speed * Global.PIXEL_PER_METER
+	var rigid_body := RigidBody2D.new()
+	rigid_body.global_transform = global_transform
+	rigid_body.linear_velocity = Vector2(velocity.x, Global.speed * Global.PIXEL_PER_METER)
+	rigid_body.collision_layer = collision_layer
+	rigid_body.collision_mask = collision_mask
+	rigid_body.lock_rotation = true
+
+	var physics_material := PhysicsMaterial.new()
+	physics_material.bounce = 0.2
+	rigid_body.physics_material_override = physics_material
+
+	get_parent().add_child(rigid_body)
+
+	for child in get_children():
+		child.reparent(rigid_body)
+
+	queue_free()
 
 
 func turn(direction: Vector2) -> void:
