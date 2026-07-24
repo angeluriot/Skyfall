@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://cw01rpj4od62c"]
 
 [ext_resource type="Texture2D" uid="uid://orw1gr8y76yg" path="res://assets/graphics/particles/speed.png" id="1_2gfar"]
+[ext_resource type="Script" uid="uid://cfj0pj4tdjlvn" path="res://scripts/foreground.gd" id="2_2r41h"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_mx8sn"]
 particles_animation = true
@@ -34,8 +35,9 @@ anim_offset_max = 1.0
 [node name="Foreground" type="GPUParticles2D" unique_id=1892834235]
 material = SubResource("CanvasItemMaterial_mx8sn")
 amount = 150
+local_coords = true
 texture = ExtResource("1_2gfar")
 lifetime = 3.0
 preprocess = 3.0
 process_material = SubResource("ParticleProcessMaterial_2r41h")
-metadata/_edit_lock_ = true
+script = ExtResource("2_2r41h")

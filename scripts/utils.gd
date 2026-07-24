@@ -2,7 +2,7 @@ extends Node
 
 
 func ratio(value: float, value_min: float, value_max: float) -> float:
-	return min(max((value - value_min) / (value_max - value_min), 0.0), 1.0)
+	return clampf((value - value_min) / (value_max - value_min), 0.0, 1.0)
 
 
 func get_circle_global_x_bounds(collision: CollisionShape2D) -> Vector2:
@@ -10,7 +10,7 @@ func get_circle_global_x_bounds(collision: CollisionShape2D) -> Vector2:
 	assert(circle != null)
 
 	var transform := collision.global_transform
-	var radius := circle.radius
+	var radius := circle.radius * 0.5
 
 	var extent_x := radius * sqrt(
 		transform.x.x * transform.x.x
@@ -39,8 +39,8 @@ func get_rectangle_global_x_bounds(collision: CollisionShape2D) -> Vector2:
 	var max_x: float = corners[0].x
 
 	for corner: Vector2 in corners:
-		min_x = min(min_x, corner.x)
-		max_x = max(max_x, corner.x)
+		min_x = minf(min_x, corner.x)
+		max_x = maxf(max_x, corner.x)
 
 	return Vector2(min_x, max_x)
 

@@ -95,10 +95,10 @@ rotation = -1.5707964
 shape = SubResource("CapsuleShape2D_g4v7s")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1386523113]
-limit_left = -260
-limit_top = -260
-limit_right = 260
-limit_bottom = 260
+limit_left = -300
+limit_top = -300
+limit_right = 300
+limit_bottom = 300
 position_smoothing_speed = 1.0
 
 [node name="Area2D" type="Area2D" parent="." unique_id=1074784558]

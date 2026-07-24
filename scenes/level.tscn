@@ -25,9 +25,6 @@ distance = -250.0
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_2r41h"]
 resource_local_to_scene = true
 
-[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_klq6b"]
-resource_local_to_scene = true
-
 [node name="Level" type="Node2D" unique_id=494716899]
 script = ExtResource("1_2r41h")
 metadata/_edit_vertical_guides_ = [-250.0, 250.0]
@@ -59,12 +56,8 @@ unique_name_in_owner = true
 [node name="Soft" type="Node2D" parent="Entities/Objects" unique_id=185815197]
 
 [node name="Ball" parent="Entities/Objects/Soft" unique_id=169278402 instance=ExtResource("3_w8frs")]
-position = Vector2(67, 43)
+position = Vector2(110, 60)
 physics_material_override = SubResource("PhysicsMaterial_2r41h")
-
-[node name="Ball2" parent="Entities/Objects/Soft" unique_id=1855154834 instance=ExtResource("3_w8frs")]
-position = Vector2(138, -51)
-physics_material_override = SubResource("PhysicsMaterial_klq6b")
 
 [node name="Hard" type="Node2D" parent="Entities/Objects" unique_id=66899177]
 
@@ -74,5 +67,6 @@ physics_material_override = SubResource("PhysicsMaterial_klq6b")
 unique_name_in_owner = true
 
 [node name="Foreground" parent="." unique_id=1892834235 instance=ExtResource("3_mx8sn")]
+local_coords = false
 
 [node name="Altimeter" parent="." unique_id=480564093 instance=ExtResource("4_mx8sn")]

@@ -15,7 +15,7 @@ func _physics_process(_delta: float) -> void:
 
 func update_text() -> void:
 	var real_altitude := Global.altitude + (-player_marker.global_position.y + 250) / Global.PIXEL_PER_METER
-	var shown_altitude = max(real_altitude - 50, 0.0)
+	var shown_altitude := maxf(real_altitude - 50, 0.0)
 	label.text = altitude_to_text(shown_altitude)
 
 

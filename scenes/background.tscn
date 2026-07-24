@@ -23,10 +23,12 @@ script = ExtResource("1_bkp1e")
 stop_y = 250.0
 
 [node name="Sky" type="Sprite2D" parent="." unique_id=135810928]
-scale = Vector2(2.3203125, 590.00006)
+position = Vector2(0.99995804, 13.5000305)
+scale = Vector2(3.125, 859.00006)
 texture = SubResource("GradientTexture1D_tevxt")
 
 [node name="Ground" type="AnimatableBody2D" parent="." unique_id=642371664]
+position = Vector2(0, 500)
 collision_layer = 32
 collision_mask = 13
 

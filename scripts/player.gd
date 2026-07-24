@@ -2,6 +2,9 @@ extends CharacterBody2D
 class_name Player
 
 
+const CAMERA_SMOOTHING_SPEED: float = 1.0
+const CAMERA_SMOOTHING_FADE_TIME: float = 3.0
+
 var is_to_the_left: bool = false
 var reachable_entities: Array[RigidBody2D] = []
 var selected_entities: Array[RigidBody2D] = []
@@ -24,6 +27,8 @@ var safe := false
 
 func _ready() -> void:
 	Global.fall_ended.connect(_on_fall_ended)
+	camera.position_smoothing_enabled = true
+	camera.position_smoothing_speed = CAMERA_SMOOTHING_SPEED
 
 
 func _physics_process(delta: float) -> void:
@@ -36,9 +41,8 @@ func _physics_process(delta: float) -> void:
 
 	move_and_slide()
 
-	if not Global.has_fall_ended:
-		fix_velocity()
-
+	fix_velocity()
+	update_camera_smoothing()
 	follow(delta)
 	update_outline()
 
@@ -56,6 +60,15 @@ func _on_fall_ended() -> void:
 	rigid_body.physics_material_override = physics_material
 
 	get_parent().add_child(rigid_body)
+
+	camera.position_smoothing_enabled = false
+	animated_sprite.material.set_shader_parameter('outline_width', 0.0)
+
+	for entity in selected_entities:
+		deselect_entity(entity)
+		selected_entities.clear()
+		selected_offset.clear()
+		selected_repel.clear()
 
 	for child in get_children():
 		child.reparent(rigid_body)
@@ -130,6 +143,12 @@ func follow(delta: float) -> void:
 	for entity in selected_entities:
 		var target := global_position + selected_offset[entity] + selected_repel[entity]
 		entity.linear_velocity = (target - entity.global_position) / delta
+
+
+func update_camera_smoothing() -> void:
+	var time_left := Global.altitude / Global.speed
+	var t := clampf(time_left / CAMERA_SMOOTHING_FADE_TIME, 0.0, 1.0)
+	camera.position_smoothing_speed = CAMERA_SMOOTHING_SPEED / maxf(t, 0.001)
 
 
 func fix_velocity() -> void:
