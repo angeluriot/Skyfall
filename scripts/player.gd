@@ -72,6 +72,8 @@ func _on_fall_ended() -> void:
 	for child in get_children():
 		child.reparent(rigid_body)
 
+	rigid_body.init()
+
 	queue_free()
 
 
