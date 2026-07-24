@@ -56,7 +56,7 @@ unique_name_in_owner = true
 [node name="Soft" type="Node2D" parent="Entities/Objects" unique_id=185815197]
 
 [node name="Ball" parent="Entities/Objects/Soft" unique_id=169278402 instance=ExtResource("3_w8frs")]
-position = Vector2(110, 60)
+position = Vector2(93, 39)
 physics_material_override = SubResource("PhysicsMaterial_2r41h")
 
 [node name="Hard" type="Node2D" parent="Entities/Objects" unique_id=66899177]

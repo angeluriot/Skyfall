@@ -48,7 +48,7 @@ func _physics_process(delta: float) -> void:
 
 
 func _on_fall_ended() -> void:
-	var rigid_body := RigidBody2D.new()
+	var rigid_body = PlayerEnd.new()
 	rigid_body.global_transform = global_transform
 	rigid_body.linear_velocity = Vector2(velocity.x, Global.speed * Global.PIXEL_PER_METER)
 	rigid_body.collision_layer = collision_layer
@@ -62,15 +62,6 @@ func _on_fall_ended() -> void:
 	get_parent().add_child(rigid_body)
 
 	camera.position_smoothing_enabled = false
-
-	var sprite := animated_sprite
-	rigid_body.contact_monitor = true
-	rigid_body.max_contacts_reported = 1
-	rigid_body.body_entered.connect(
-		func(_body: Node) -> void:
-			sprite.material.set_shader_parameter('outline_width', 0.0),
-		CONNECT_ONE_SHOT
-	)
 
 	for entity in selected_entities:
 		deselect_entity(entity)
