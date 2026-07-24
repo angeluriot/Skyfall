@@ -62,7 +62,15 @@ func _on_fall_ended() -> void:
 	get_parent().add_child(rigid_body)
 
 	camera.position_smoothing_enabled = false
-	animated_sprite.material.set_shader_parameter('outline_width', 0.0)
+
+	var sprite := animated_sprite
+	rigid_body.contact_monitor = true
+	rigid_body.max_contacts_reported = 1
+	rigid_body.body_entered.connect(
+		func(_body: Node) -> void:
+			sprite.material.set_shader_parameter('outline_width', 0.0),
+		CONNECT_ONE_SHOT
+	)
 
 	for entity in selected_entities:
 		deselect_entity(entity)
