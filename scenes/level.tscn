@@ -1,10 +1,9 @@
 [gd_scene format=3 uid="uid://bwu86y8ja438"]
 
-[ext_resource type="Script" uid="uid://c2g2vo0y0f3cf" path="res://scripts/level.gd" id="1_2r41h"]
+[ext_resource type="Script" uid="uid://bpjoclcsuqerx" path="res://scripts/level.gd" id="1_2r41h"]
 [ext_resource type="PackedScene" uid="uid://brttwucoij5jk" path="res://scenes/background.tscn" id="1_ppgk2"]
 [ext_resource type="PackedScene" uid="uid://bnfsdaqbhy6e7" path="res://scenes/player.tscn" id="2_w7c3h"]
 [ext_resource type="PackedScene" uid="uid://cw01rpj4od62c" path="res://scenes/foreground.tscn" id="3_mx8sn"]
-[ext_resource type="PackedScene" uid="uid://jyvptelm8kun" path="res://scenes/objects/ball.tscn" id="3_w8frs"]
 [ext_resource type="PackedScene" uid="uid://74yaierlx7m5" path="res://scenes/altimeter.tscn" id="4_mx8sn"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_g4v7s"]
@@ -21,9 +20,6 @@ distance = -250.0
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_d0u6y"]
 distance = -250.0
-
-[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_2r41h"]
-resource_local_to_scene = true
 
 [node name="Level" type="Node2D" unique_id=494716899]
 script = ExtResource("1_2r41h")
@@ -48,20 +44,7 @@ shape = SubResource("WorldBoundaryShape2D_57qmd")
 [node name="Bottom" type="CollisionShape2D" parent="Boundaries" unique_id=524056229]
 shape = SubResource("WorldBoundaryShape2D_d0u6y")
 
-[node name="Entities" type="Node2D" parent="." unique_id=409501570]
-unique_name_in_owner = true
-
-[node name="Objects" type="Node2D" parent="Entities" unique_id=664079796]
-
-[node name="Soft" type="Node2D" parent="Entities/Objects" unique_id=185815197]
-
-[node name="Ball" parent="Entities/Objects/Soft" unique_id=169278402 instance=ExtResource("3_w8frs")]
-position = Vector2(93, 39)
-physics_material_override = SubResource("PhysicsMaterial_2r41h")
-
-[node name="Hard" type="Node2D" parent="Entities/Objects" unique_id=66899177]
-
-[node name="People" type="Node2D" parent="Entities" unique_id=444954295]
+[node name="EntitiesContainer" type="Node2D" parent="." unique_id=811180475]
 
 [node name="Player" parent="." unique_id=292713720 instance=ExtResource("2_w7c3h")]
 unique_name_in_owner = true

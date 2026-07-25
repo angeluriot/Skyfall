@@ -28,6 +28,8 @@ scale = Vector2(3.125, 859.00006)
 texture = SubResource("GradientTexture1D_tevxt")
 
 [node name="Ground" type="AnimatableBody2D" parent="." unique_id=642371664]
+z_index = 100
+z_as_relative = false
 position = Vector2(0, 500)
 collision_layer = 32
 collision_mask = 13

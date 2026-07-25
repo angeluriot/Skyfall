@@ -22,7 +22,8 @@ func init() -> void:
 
 func _on_body_entered(body: Node) -> void:
 	if body is AnimatableBody2D:
-		if abs(linear_velocity.y) > 150:
+		if abs(linear_velocity.y) > Global.DEATH_SPEED:
+			print(linear_velocity.y)
 			Global.deaths += 1
 			explode()
 
@@ -34,4 +35,5 @@ func _on_body_entered(body: Node) -> void:
 func explode() -> void:
 	sprite.hide()
 	collision.set_deferred('disabled', true)
+	particles.reparent(get_parent())
 	particles.emitting = true

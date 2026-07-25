@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://c33yscw58iq47"]
+
+[ext_resource type="PackedScene" uid="uid://jyvptelm8kun" path="res://scenes/objects/ball.tscn" id="1_uw6xe"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_uw6xe"]
+resource_local_to_scene = true
+
+[node name="Entities" type="Node2D" unique_id=1311857949]
+metadata/_edit_vertical_guides_ = [-250.0, 250.0, -150.0, 150.0]
+metadata/_edit_horizontal_guides_ = [250.0, -250.0, -100.0, 100.0]
+
+[node name="Objects" type="Node2D" parent="." unique_id=1571489263]
+
+[node name="Soft" type="Node2D" parent="Objects" unique_id=201616509]
+
+[node name="Ball" parent="Objects/Soft" unique_id=169278402 instance=ExtResource("1_uw6xe")]
+position = Vector2(-106, -65)
+physics_material_override = SubResource("PhysicsMaterial_uw6xe")
+
+[node name="Hard" type="Node2D" parent="Objects" unique_id=908867921]
+
+[node name="People" type="Node2D" parent="." unique_id=346639341]
