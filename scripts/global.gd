@@ -109,7 +109,7 @@ func end_fall() -> void:
 
 
 func _on_after_end() -> void:
-	var success := deaths == 0
+	var success := current_level < 10 and deaths == 0
 	var next_level := current_level + 1 if success else current_level
 	play_transition(success, next_level)
 
