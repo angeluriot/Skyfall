@@ -9,6 +9,15 @@ resource_local_to_scene = true
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_irbrv"]
 resource_local_to_scene = true
 
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_805pq"]
+resource_local_to_scene = true
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ki8mi"]
+resource_local_to_scene = true
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_u61dc"]
+resource_local_to_scene = true
+
 [node name="Entities" type="Node2D" unique_id=1311857949]
 metadata/_edit_vertical_guides_ = [-250.0, 250.0, -150.0, 150.0]
 metadata/_edit_horizontal_guides_ = [250.0, -250.0, -100.0, 100.0]
@@ -24,7 +33,19 @@ physics_material_override = SubResource("PhysicsMaterial_aq65u")
 [node name="Hard" type="Node2D" parent="Objects" unique_id=908867921]
 
 [node name="Box" parent="Objects/Hard" unique_id=169278402 instance=ExtResource("2_ki8mi")]
-position = Vector2(153, -144)
+position = Vector2(122, -140)
 physics_material_override = SubResource("PhysicsMaterial_irbrv")
+
+[node name="Box2" parent="Objects/Hard" unique_id=1182361326 instance=ExtResource("2_ki8mi")]
+position = Vector2(57, 135)
+physics_material_override = SubResource("PhysicsMaterial_805pq")
+
+[node name="Box3" parent="Objects/Hard" unique_id=2072006572 instance=ExtResource("2_ki8mi")]
+position = Vector2(188, 11)
+physics_material_override = SubResource("PhysicsMaterial_ki8mi")
+
+[node name="Box4" parent="Objects/Hard" unique_id=1334228985 instance=ExtResource("2_ki8mi")]
+position = Vector2(-59, -135)
+physics_material_override = SubResource("PhysicsMaterial_u61dc")
 
 [node name="People" type="Node2D" parent="." unique_id=346639341]

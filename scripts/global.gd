@@ -15,8 +15,8 @@ const ALTITUDES := {
 	2: 2000.0,
 	3: 3000.0,
 	4: 3000.0,
-	5: 3500.0,
-	6: 2500.0,
+	5: 4000.0,
+	6: 2000.0,
 	7: 4000.0,
 	8: 3000.0,
 	9: 7000.0,
@@ -25,7 +25,7 @@ const ALTITUDES := {
 
 const PersonExplosionScene := preload('res://scenes/person_explosion.tscn')
 
-var current_level := 1
+var current_level := 8
 var altitude: float = ALTITUDES[current_level]
 var max_altitude := altitude
 var has_fall_ended := false
