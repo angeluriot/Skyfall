@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://dqoe5d1iub1x" path="res://scripts/ball.gd" id="1_12lam"]
 [ext_resource type="Texture2D" uid="uid://dwldjisfq2jps" path="res://assets/graphics/objects/ball.png" id="1_itkb2"]
 [ext_resource type="Shader" uid="uid://d0japmm85m7wl" path="res://shaders/outline.gdshader" id="2_aaoto"]
+[ext_resource type="AudioStream" uid="uid://dlqoydikmtlxv" path="res://assets/audio/bounce_1.wav" id="3_bounce"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ball"]
 resource_local_to_scene = true
@@ -23,12 +24,16 @@ mass = 0.4
 physics_material_override = SubResource("PhysicsMaterial_ball")
 gravity_scale = 0.0
 inertia = 1.0
+contact_monitor = true
+max_contacts_reported = 2
 angular_damp = 2.0
 script = ExtResource("1_12lam")
 min_default_rotation_speed = 0.5
 max_default_rotation_speed = 2.0
 max_speed = 200.0
 max_angular_speed = 10.0
+min_bounce_speed = 30.0
+min_bounce_volume_db = -50.0
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=493148785]
 material = SubResource("ShaderMaterial_g2els")
@@ -36,3 +41,6 @@ texture = ExtResource("1_itkb2")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1396514910]
 shape = SubResource("CircleShape2D_g4v7s")
+
+[node name="BounceSound" type="AudioStreamPlayer2D" parent="." unique_id=483590108]
+stream = ExtResource("3_bounce")
