@@ -18,7 +18,9 @@ const ALTITUDES := {
 	5: 10000.0
 }
 
-var current_level := 4
+const PersonExplosionScene := preload('res://scenes/person_explosion.tscn')
+
+var current_level := 1
 var altitude: float = ALTITUDES[current_level]
 var max_altitude := altitude
 var has_fall_ended := false
@@ -32,6 +34,19 @@ var transition_style: StyleBoxFlat
 
 func _ready() -> void:
 	setup_transition()
+	warmup_explosion()
+
+
+func warmup_explosion() -> void:
+	var explosion := PersonExplosionScene.instantiate() as GPUParticles2D
+	explosion.position = Vector2(-100000, -100000)
+	explosion.get_node('ExplosionSound').queue_free()
+	add_child(explosion)
+	explosion.emitting = true
+
+	var timer := get_tree().create_timer(explosion.lifetime * (1.0 + explosion.process_material.lifetime_randomness) + 0.1)
+	timer.timeout.connect(explosion.queue_free)
+
 
 
 func setup_transition() -> void:
