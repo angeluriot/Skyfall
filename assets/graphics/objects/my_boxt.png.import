@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://db572j7pnqfs8"
-path="res://.godot/imported/move_up.png-d85fd29b18d123a9bf9dfc95c34f4c94.ctex"
+uid="uid://bfbe4b5t1pf63"
+path="res://.godot/imported/my_boxt.png-0c6dc3a713e6bb2f6d7e41f558d72532.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/graphics/characters/player/move_up.png"
-dest_files=["res://.godot/imported/move_up.png-d85fd29b18d123a9bf9dfc95c34f4c94.ctex"]
+source_file="res://assets/graphics/objects/my_boxt.png"
+dest_files=["res://.godot/imported/my_boxt.png-0c6dc3a713e6bb2f6d7e41f558d72532.ctex"]
 
 [params]
 

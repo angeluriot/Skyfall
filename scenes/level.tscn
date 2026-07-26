@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://bnfsdaqbhy6e7" path="res://scenes/player.tscn" id="2_w7c3h"]
 [ext_resource type="PackedScene" uid="uid://cw01rpj4od62c" path="res://scenes/foreground.tscn" id="3_mx8sn"]
 [ext_resource type="PackedScene" uid="uid://74yaierlx7m5" path="res://scenes/altimeter.tscn" id="4_mx8sn"]
+[ext_resource type="PackedScene" uid="uid://x80y4x6lp6fk" path="res://scenes/message.tscn" id="6_2r41h"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_g4v7s"]
 normal = Vector2(1, 0)
@@ -53,3 +54,5 @@ unique_name_in_owner = true
 local_coords = false
 
 [node name="Altimeter" parent="." unique_id=480564093 instance=ExtResource("4_mx8sn")]
+
+[node name="Message" parent="." unique_id=86876063 instance=ExtResource("6_2r41h")]

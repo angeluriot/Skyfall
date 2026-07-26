@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://jyvptelm8kun" path="res://scenes/objects/ball.tscn" id="1_1pwbc"]
 
-[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_j08sa"]
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ksju7"]
 resource_local_to_scene = true
 
 [node name="Entities" type="Node2D" unique_id=1311857949]
@@ -14,8 +14,8 @@ metadata/_edit_horizontal_guides_ = [250.0, -250.0, -100.0, 100.0]
 [node name="Soft" type="Node2D" parent="Objects" unique_id=201616509]
 
 [node name="Ball" parent="Objects/Soft" unique_id=169278402 instance=ExtResource("1_1pwbc")]
-position = Vector2(102, 54)
-physics_material_override = SubResource("PhysicsMaterial_j08sa")
+position = Vector2(75, 63)
+physics_material_override = SubResource("PhysicsMaterial_ksju7")
 
 [node name="Hard" type="Node2D" parent="Objects" unique_id=908867921]
 

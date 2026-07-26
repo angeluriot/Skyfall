@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://db572j7pnqfs8"
-path="res://.godot/imported/move_up.png-d85fd29b18d123a9bf9dfc95c34f4c94.ctex"
+uid="uid://bitkma60q2jdk"
+path="res://.godot/imported/clouds_uni.png-ea36210b12a34aa7af001f7f3059d8b1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/graphics/characters/player/move_up.png"
-dest_files=["res://.godot/imported/move_up.png-d85fd29b18d123a9bf9dfc95c34f4c94.ctex"]
+source_file="res://assets/graphics/background/clouds_uni.png"
+dest_files=["res://.godot/imported/clouds_uni.png-ea36210b12a34aa7af001f7f3059d8b1.ctex"]
 
 [params]
 

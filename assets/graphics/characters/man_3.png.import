@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://db572j7pnqfs8"
-path="res://.godot/imported/move_up.png-d85fd29b18d123a9bf9dfc95c34f4c94.ctex"
+uid="uid://cpxywhunayy26"
+path="res://.godot/imported/man_3.png-694325e4afc26ff1a38e646d2ae4bf8c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/graphics/characters/player/move_up.png"
-dest_files=["res://.godot/imported/move_up.png-d85fd29b18d123a9bf9dfc95c34f4c94.ctex"]
+source_file="res://assets/graphics/characters/man_3.png"
+dest_files=["res://.godot/imported/man_3.png-694325e4afc26ff1a38e646d2ae4bf8c.ctex"]
 
 [params]
 

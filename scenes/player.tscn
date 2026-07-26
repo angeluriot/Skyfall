@@ -1,24 +1,17 @@
 [gd_scene format=3 uid="uid://bnfsdaqbhy6e7"]
 
 [ext_resource type="Script" uid="uid://b4mlf7jnxgll4" path="res://scripts/player.gd" id="1_qhqgy"]
-[ext_resource type="Shader" uid="uid://d0japmm85m7wl" path="res://shaders/outline.gdshader" id="2_qhqgy"]
 [ext_resource type="Texture2D" uid="uid://b7imyxq634j58" path="res://assets/graphics/characters/player/move.png" id="3_dqkch"]
 [ext_resource type="Texture2D" uid="uid://c1wktcrh5lk8v" path="res://assets/graphics/characters/player/idle.png" id="3_qlg0r"]
 [ext_resource type="Texture2D" uid="uid://du4lwkguvjalw" path="res://assets/graphics/characters/player/idle_down_grab.png" id="4_d2wvv"]
-[ext_resource type="Texture2D" uid="uid://cgk3qt38wvmt3" path="res://assets/graphics/particles/death.png" id="4_dqkch"]
 [ext_resource type="Texture2D" uid="uid://jg3qa3frtp1o" path="res://assets/graphics/characters/player/idle_grab.png" id="4_smehm"]
 [ext_resource type="Texture2D" uid="uid://cmeqqqi8ugass" path="res://assets/graphics/characters/player/move_down.png" id="5_tuyoq"]
-[ext_resource type="Texture2D" uid="uid://cqajq2jjwiscj" path="res://assets/graphics/characters/player/move_up.png" id="6_fjrip"]
+[ext_resource type="Texture2D" uid="uid://db572j7pnqfs8" path="res://assets/graphics/characters/player/move_up.png" id="6_fjrip"]
 [ext_resource type="Texture2D" uid="uid://bkkd27iol72tm" path="res://assets/graphics/characters/player/idle_up_grab.png" id="6_jej6c"]
 [ext_resource type="Texture2D" uid="uid://dwrwbhl47vesi" path="res://assets/graphics/characters/player/move_grab.png" id="7_ur7pv"]
 [ext_resource type="Texture2D" uid="uid://deudmvoqtdhmr" path="res://assets/graphics/characters/player/move_down_grab.png" id="8_3v2ag"]
 [ext_resource type="Texture2D" uid="uid://xxf6ya2on3a2" path="res://assets/graphics/characters/player/move_up_grab.png" id="12_f1ej7"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_w8frs"]
-resource_local_to_scene = true
-shader = ExtResource("2_qhqgy")
-shader_parameter/outline_color = Color(0.04350001, 0.87, 0.22257505, 1)
-shader_parameter/outline_width = 0.0
+[ext_resource type="PackedScene" uid="uid://bprpqs5g1p0ed" path="res://scenes/person_explosion.tscn" id="13_jej6c"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_y4r1p"]
 atlas = ExtResource("3_qlg0r")
@@ -498,16 +491,11 @@ radius = 4.0
 height = 28.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_yf5fn"]
-radius = 18.0
-height = 46.0
+radius = 24.0
+height = 58.0
 
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_dqkch"]
-particles_animation = true
-particles_anim_h_frames = 6
-particles_anim_v_frames = 1
-particles_anim_loop = false
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_30aqd"]
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_f1ej7"]
+resource_local_to_scene = true
 lifetime_randomness = 0.5
 particle_flag_disable_z = true
 emission_shape_scale = Vector3(16, 8, 1)
@@ -537,12 +525,10 @@ grab_max_repel = 5.0
 [node name="Marker2D" type="Marker2D" parent="." unique_id=639482745]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1076215595]
-material = SubResource("ShaderMaterial_w8frs")
 sprite_frames = SubResource("SpriteFrames_g4v7s")
-animation = &"idle_up_grab"
+animation = &"idle"
 autoplay = "idle"
-frame = 5
-frame_progress = 0.7861454
+frame_progress = 0.6164154
 speed_scale = 1.5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=61753676]
@@ -566,15 +552,8 @@ collision_mask = 12
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1569520716]
 shape = SubResource("CapsuleShape2D_yf5fn")
 
-[node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=1557506028]
-material = SubResource("CanvasItemMaterial_dqkch")
-emitting = false
-amount = 30
-texture = ExtResource("4_dqkch")
-lifetime = 0.5
-one_shot = true
-explosiveness = 1.0
-process_material = SubResource("ParticleProcessMaterial_30aqd")
+[node name="GPUParticles2D" parent="." unique_id=1609967048 instance=ExtResource("13_jej6c")]
+process_material = SubResource("ParticleProcessMaterial_f1ej7")
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

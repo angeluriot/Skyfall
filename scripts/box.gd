@@ -13,7 +13,7 @@ var selected: bool = false
 
 
 func is_soft() -> bool:
-	return true
+	return false
 
 
 func _ready() -> void:
@@ -33,8 +33,8 @@ func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 
 
 func _on_fall_ended() -> void:
-	physics_material_override.bounce = 0.5
 	gravity_scale = 1.0
+	inertia = 0.0
 	linear_velocity.y = Global.SPEED * Global.PIXEL_PER_METER
 
 

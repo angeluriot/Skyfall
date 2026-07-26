@@ -1,0 +1,47 @@
+[gd_scene format=3 uid="uid://x80y4x6lp6fk"]
+
+[ext_resource type="Script" uid="uid://c2sdmto5xtj6a" path="res://scripts/message.gd" id="1_x5w8s"]
+[ext_resource type="FontFile" uid="uid://cngi8w8i0jlq1" path="res://assets/fonts/determination.ttf" id="2_x5w8s"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_4vfji"]
+font = ExtResource("2_x5w8s")
+font_size = 12
+shadow_size = 0
+shadow_color = Color(0, 0, 0.34509805, 0.2509804)
+shadow_offset = Vector2(0, 1)
+
+[node name="Message" type="CanvasLayer" unique_id=480564093]
+script = ExtResource("1_x5w8s")
+
+[node name="Control" type="Control" parent="." unique_id=1682690403]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Control" unique_id=228649442]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -70.5
+offset_top = -11.5
+offset_right = 70.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "The plane door just opened!
+You’re now in free fall!"
+label_settings = SubResource("LabelSettings_4vfji")
+horizontal_alignment = 1
+vertical_alignment = 1

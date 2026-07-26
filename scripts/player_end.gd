@@ -2,7 +2,6 @@ extends RigidBody2D
 class_name PlayerEnd
 
 
-var outline_removed := false
 var sprite: AnimatedSprite2D
 var collision: CollisionShape2D
 var particles: GPUParticles2D
@@ -21,15 +20,22 @@ func init() -> void:
 
 
 func _on_body_entered(body: Node) -> void:
-	if body is AnimatableBody2D:
-		if abs(linear_velocity.y) > Global.DEATH_SPEED:
-			print(linear_velocity.y)
-			Global.deaths += 1
-			explode()
+	if body is AnimatableBody2D and abs(linear_velocity.y) > Global.DEATH_SPEED:
+		Global.deaths += 1
+		explode()
 
-	if not outline_removed:
-		($AnimatedSprite2D as AnimatedSprite2D).material.set_shader_parameter('outline_width', 0.0)
-		outline_removed = true
+	if body.has_method('is_soft') and body.is_soft():
+		return
+
+	if body.has_method('is_soft') and not body.is_soft():
+		Global.deaths += 1
+		explode()
+
+	if body is RigidBody2D and abs(linear_velocity.y - body.linear_velocity.y) > Global.DEATH_SPEED:
+		print(linear_velocity.y)
+		print(body.linear_velocity.y)
+		Global.deaths += 1
+		explode()
 
 
 func explode() -> void:

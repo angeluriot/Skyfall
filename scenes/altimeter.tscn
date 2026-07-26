@@ -1,10 +1,10 @@
 [gd_scene format=3 uid="uid://74yaierlx7m5"]
 
-[ext_resource type="FontFile" uid="uid://g8kctou6mb6b" path="res://assets/fonts/upheavtt.ttf" id="1_tg63u"]
-[ext_resource type="Script" uid="uid://du08otdquni3e" path="res://scenes/altimeter.gd" id="1_vgbvo"]
+[ext_resource type="Script" uid="uid://du08otdquni3e" path="res://scripts/altimeter.gd" id="1_vgbvo"]
+[ext_resource type="FontFile" uid="uid://dcu4rju51wvhp" path="res://assets/fonts/custom.ttf" id="2_vgbvo"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_4vfji"]
-font = ExtResource("1_tg63u")
+font = ExtResource("2_vgbvo")
 font_size = 20
 shadow_size = 0
 shadow_color = Color(0, 0, 0.34509805, 0.2509804)
@@ -12,8 +12,6 @@ shadow_offset = Vector2(0, 2)
 
 [node name="Altimeter" type="CanvasLayer" unique_id=480564093]
 script = ExtResource("1_vgbvo")
-initial_altitude = 3000
-speed = 300.0
 
 [node name="Control" type="Control" parent="." unique_id=1682690403]
 layout_mode = 3
