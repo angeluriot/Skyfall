@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://bprpqs5g1p0ed"]
 
 [ext_resource type="Texture2D" uid="uid://cgk3qt38wvmt3" path="res://assets/graphics/particles/death.png" id="1_jrqxw"]
+[ext_resource type="AudioStream" uid="uid://ypi64ssvecda" path="res://assets/audio/explosion.mp3" id="2_explosion"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_dqkch"]
 particles_animation = true
@@ -32,3 +33,7 @@ lifetime = 0.5
 one_shot = true
 explosiveness = 1.0
 process_material = SubResource("ParticleProcessMaterial_30aqd")
+
+[node name="ExplosionSound" type="AudioStreamPlayer2D" parent="." unique_id=558156193]
+stream = ExtResource("2_explosion")
+volume_db = -5.0

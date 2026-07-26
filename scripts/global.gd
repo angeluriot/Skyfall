@@ -25,22 +25,46 @@ var deaths := 0
 var is_transitioning := false
 
 var transition_layer: CanvasLayer
-var transition_rect: ColorRect
+var transition_rect: Panel
+var transition_style: StyleBoxFlat
 
 
 func _ready() -> void:
-	_setup_transition()
+	setup_transition()
 
 
-func _setup_transition() -> void:
+func setup_transition() -> void:
 	transition_layer = CanvasLayer.new()
 	transition_layer.layer = 128
 	add_child(transition_layer)
 
-	transition_rect = ColorRect.new()
+	transition_style = StyleBoxFlat.new()
+	transition_style.border_width_left = 1
+	transition_style.border_width_top = 1
+	transition_style.border_width_right = 1
+	transition_style.border_width_bottom = 1
+	transition_style.border_color = Color.BLACK
+
+	transition_rect = Panel.new()
 	transition_rect.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	transition_rect.visible = false
+	transition_rect.add_theme_stylebox_override('panel', transition_style)
 	transition_layer.add_child(transition_rect)
+
+	var shadow_style := StyleBoxFlat.new()
+	shadow_style.bg_color = Color('#00005840')
+
+	var transition_shadow := Panel.new()
+	transition_shadow.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	transition_shadow.show_behind_parent = true
+	transition_shadow.anchor_right = 1.0
+	transition_shadow.anchor_bottom = 1.0
+	transition_shadow.offset_left = -3.0
+	transition_shadow.offset_top = -3.0
+	transition_shadow.offset_right = 3.0
+	transition_shadow.offset_bottom = 3.0
+	transition_shadow.add_theme_stylebox_override('panel', shadow_style)
+	transition_rect.add_child(transition_shadow)
 
 
 func _physics_process(delta: float) -> void:
@@ -77,7 +101,7 @@ func play_transition(success: bool, next_level: int) -> void:
 
 	var size := get_viewport().get_visible_rect().size
 
-	transition_rect.color = SUCCESS_COLOR if success else FAIL_COLOR
+	transition_style.bg_color = SUCCESS_COLOR if success else FAIL_COLOR
 	transition_rect.size = size * 2.0
 	transition_rect.position = Vector2(-size.x * 0.5, size.y)
 	transition_rect.visible = true
@@ -86,15 +110,10 @@ func play_transition(success: bool, next_level: int) -> void:
 	var revealed_y := -size.y * 2.1
 
 	var tween := create_tween()
-	# The rectangle rises to fully cover the screen.
-	tween.tween_property(transition_rect, 'position:y', covered_y, TRANSITION_COVER_TIME) \
-		.set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
-	# The next scene is loaded while hidden behind the rectangle.
+	tween.tween_property(transition_rect, 'position:y', covered_y, TRANSITION_COVER_TIME).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
 	tween.tween_callback(func() -> void: reset(next_level))
 	tween.tween_interval(TRANSITION_HOLD_TIME)
-	# The rectangle keeps rising to reveal the next scene.
-	tween.tween_property(transition_rect, 'position:y', revealed_y, TRANSITION_REVEAL_TIME) \
-		.set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
+	tween.tween_property(transition_rect, 'position:y', revealed_y, TRANSITION_REVEAL_TIME).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
 	tween.tween_callback(func() -> void:
 		transition_rect.visible = false
 		is_transitioning = false

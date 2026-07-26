@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://74yaierlx7m5" path="res://scenes/altimeter.tscn" id="4_mx8sn"]
 [ext_resource type="PackedScene" uid="uid://x80y4x6lp6fk" path="res://scenes/message.tscn" id="6_2r41h"]
 [ext_resource type="AudioStream" uid="uid://dv4qef1kbx517" path="res://assets/audio/wind.mp3" id="7_klq6b"]
+[ext_resource type="AudioStream" uid="uid://y0n5mw4l02x8" path="res://assets/audio/music.mp3" id="8_b121j"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_g4v7s"]
 normal = Vector2(1, 0)
@@ -58,7 +59,12 @@ local_coords = false
 
 [node name="Message" parent="." unique_id=86876063 instance=ExtResource("6_2r41h")]
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1011129866]
+[node name="Wind" type="AudioStreamPlayer" parent="." unique_id=1011129866]
 stream = ExtResource("7_klq6b")
 volume_db = -10.0
+autoplay = true
+
+[node name="Music" type="AudioStreamPlayer" parent="." unique_id=251786516]
+stream = ExtResource("8_b121j")
+volume_db = -20.0
 autoplay = true

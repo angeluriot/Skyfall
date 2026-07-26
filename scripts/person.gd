@@ -76,3 +76,4 @@ func explode() -> void:
 	collision.set_deferred('disabled', true)
 	particles.reparent(get_parent())
 	particles.emitting = true
+	particles.get_node('ExplosionSound').play()
