@@ -10,6 +10,7 @@ var selected: bool = false
 @export var min_bounce_speed: float;
 @export var min_bounce_volume_db: float;
 @export var max_bounce_volume_db: float;
+@export var push_volume_db: float = -30.0;
 
 var last_speed: float = 0.0
 
@@ -31,6 +32,12 @@ func _on_body_entered(_body: Node) -> void:
 	var t := clampf((last_speed - min_bounce_speed) / (max_speed - min_bounce_speed), 0.0, 1.0)
 	bounce_sound.volume_db = lerpf(min_bounce_volume_db, max_bounce_volume_db, t)
 	bounce_sound.play()
+
+
+func play_push_sound() -> void:
+	if not bounce_sound.playing:
+		bounce_sound.volume_db = push_volume_db
+		bounce_sound.play()
 
 
 func _physics_process(_delta: float) -> void:

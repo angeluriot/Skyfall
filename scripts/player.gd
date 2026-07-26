@@ -224,6 +224,8 @@ func push(direction: Vector2) -> void:
 					selected_repel[rigid_body] = selected_repel[rigid_body].normalized() * grab_max_repel
 			elif direction.dot(push_direction) > 0.0:
 				rigid_body.apply_central_force(push_direction * push_force)
+				if rigid_body.has_method('play_push_sound'):
+					rigid_body.play_push_sound()
 
 
 func follow(delta: float) -> void:
