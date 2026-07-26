@@ -3,7 +3,7 @@ extends Node2D
 
 const MIN_WIND_VOLUME_DB: float = -60.0
 const MAX_WIND_VOLUME_DB: float = -5.0
-const MIN_MUSIC_VOLUME_DB: float = -100.0
+const MIN_MUSIC_VOLUME_DB: float = -80.0
 const MAX_MUSIC_VOLUME_DB: float = -20.0
 
 @onready var wind_player := $Wind as AudioStreamPlayer

@@ -61,10 +61,10 @@ local_coords = false
 
 [node name="Wind" type="AudioStreamPlayer" parent="." unique_id=1011129866]
 stream = ExtResource("7_klq6b")
-volume_db = -10.0
+volume_db = -60.0
 autoplay = true
 
 [node name="Music" type="AudioStreamPlayer" parent="." unique_id=251786516]
 stream = ExtResource("8_b121j")
-volume_db = -20.0
+volume_db = -80.0
 autoplay = true
