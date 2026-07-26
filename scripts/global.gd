@@ -5,19 +5,42 @@ signal fall_ended
 const SPEED := 300.0
 const PIXEL_PER_METER := 1
 const DEATH_SPEED := 100.0
-const SAFE_COLOR := Color('#0bde39')
+const SUCCESS_COLOR := Color('#09d37c')
+const FAIL_COLOR := Color('#d32940')
+const TRANSITION_COVER_TIME := 0.5
+const TRANSITION_REVEAL_TIME := 0.5
+const TRANSITION_HOLD_TIME := 0.0
 const ALTITUDES := {
-	1: 2500.0,
+	1: 1000.0,
 	2: 2000.0,
 	3: 3000.0,
 	4: 3000.0
 }
 
-var current_level := 4
+var current_level := 1
 var altitude: float = ALTITUDES[current_level]
 var max_altitude := altitude
 var has_fall_ended := false
 var deaths := 0
+var is_transitioning := false
+
+var transition_layer: CanvasLayer
+var transition_rect: ColorRect
+
+
+func _ready() -> void:
+	_setup_transition()
+
+
+func _setup_transition() -> void:
+	transition_layer = CanvasLayer.new()
+	transition_layer.layer = 128
+	add_child(transition_layer)
+
+	transition_rect = ColorRect.new()
+	transition_rect.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	transition_rect.visible = false
+	transition_layer.add_child(transition_rect)
 
 
 func _physics_process(delta: float) -> void:
@@ -41,10 +64,41 @@ func end_fall() -> void:
 
 
 func _on_after_end() -> void:
-	if deaths > 0:
-		reset(current_level)
-	else:
-		reset(current_level + 1)
+	var success := deaths == 0
+	var next_level := current_level + 1 if success else current_level
+	play_transition(success, next_level)
+
+
+func play_transition(success: bool, next_level: int) -> void:
+	if is_transitioning:
+		return
+
+	is_transitioning = true
+
+	var size := get_viewport().get_visible_rect().size
+
+	transition_rect.color = SUCCESS_COLOR if success else FAIL_COLOR
+	transition_rect.size = size * 2.0
+	transition_rect.position = Vector2(-size.x * 0.5, size.y)
+	transition_rect.visible = true
+
+	var covered_y := -size.y * 0.5
+	var revealed_y := -size.y * 2.1
+
+	var tween := create_tween()
+	# The rectangle rises to fully cover the screen.
+	tween.tween_property(transition_rect, 'position:y', covered_y, TRANSITION_COVER_TIME) \
+		.set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
+	# The next scene is loaded while hidden behind the rectangle.
+	tween.tween_callback(func() -> void: reset(next_level))
+	tween.tween_interval(TRANSITION_HOLD_TIME)
+	# The rectangle keeps rising to reveal the next scene.
+	tween.tween_property(transition_rect, 'position:y', revealed_y, TRANSITION_REVEAL_TIME) \
+		.set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
+	tween.tween_callback(func() -> void:
+		transition_rect.visible = false
+		is_transitioning = false
+	)
 
 
 func reset(level: int) -> void:

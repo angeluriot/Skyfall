@@ -23,7 +23,7 @@ func _ready() -> void:
 		1:
 			show_messages([
 				MessageData.new('The plane door just opened!\nYou’re now in free fall!', 1.0, 2.0, 0.5),
-				MessageData.new('Quick, move above the ball\nwith WASD/arrow keys!', 0.5, 2.0, 0.5)
+				MessageData.new('Quick, move above the ball\nwith WASD / arrow keys!', 0.5, 2.5, 0.5)
 			], 0.0)
 		2:
 			show_messages([
