@@ -1,4 +1,22 @@
-[gd_scene format=3 uid="uid://du8nrqhjnf1qw"]
+[gd_scene format=3 uid="uid://bq0jbbfg5y4b"]
+
+[ext_resource type="PackedScene" uid="uid://jyvptelm8kun" path="res://scenes/objects/ball.tscn" id="1_845dy"]
+[ext_resource type="PackedScene" uid="uid://ndg5idvcneff" path="res://scenes/person.tscn" id="2_dswqx"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_845dy"]
+resource_local_to_scene = true
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_dswqx"]
+resource_local_to_scene = true
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_laj7o"]
+resource_local_to_scene = true
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_fi56y"]
+resource_local_to_scene = true
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_hldbq"]
+resource_local_to_scene = true
 
 [node name="Entities" type="Node2D" unique_id=1311857949]
 metadata/_edit_vertical_guides_ = [-250.0, 250.0, -150.0, 150.0]
@@ -8,6 +26,28 @@ metadata/_edit_horizontal_guides_ = [250.0, -250.0, -100.0, 100.0]
 
 [node name="Soft" type="Node2D" parent="Objects" unique_id=201616509]
 
+[node name="Ball" parent="Objects/Soft" unique_id=169278402 instance=ExtResource("1_845dy")]
+position = Vector2(0, 59)
+physics_material_override = SubResource("PhysicsMaterial_845dy")
+
+[node name="Ball2" parent="Objects/Soft" unique_id=463379348 instance=ExtResource("1_845dy")]
+position = Vector2(110, 59)
+physics_material_override = SubResource("PhysicsMaterial_dswqx")
+
+[node name="Ball3" parent="Objects/Soft" unique_id=1417963714 instance=ExtResource("1_845dy")]
+position = Vector2(-113, 59)
+physics_material_override = SubResource("PhysicsMaterial_laj7o")
+
 [node name="Hard" type="Node2D" parent="Objects" unique_id=908867921]
 
 [node name="People" type="Node2D" parent="." unique_id=346639341]
+
+[node name="Person" parent="People" unique_id=477967601 instance=ExtResource("2_dswqx")]
+position = Vector2(56, -51)
+physics_material_override = SubResource("PhysicsMaterial_fi56y")
+type = 4
+
+[node name="Person2" parent="People" unique_id=412970669 instance=ExtResource("2_dswqx")]
+position = Vector2(-64, -51)
+physics_material_override = SubResource("PhysicsMaterial_hldbq")
+type = 3

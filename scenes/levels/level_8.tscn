@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://babicwubvprc"]
+
+[ext_resource type="PackedScene" uid="uid://jyvptelm8kun" path="res://scenes/objects/ball.tscn" id="1_805pq"]
+[ext_resource type="PackedScene" uid="uid://bgkhne1h3y0fv" path="res://scenes/objects/box.tscn" id="2_ki8mi"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_aq65u"]
+resource_local_to_scene = true
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_irbrv"]
+resource_local_to_scene = true
+
+[node name="Entities" type="Node2D" unique_id=1311857949]
+metadata/_edit_vertical_guides_ = [-250.0, 250.0, -150.0, 150.0]
+metadata/_edit_horizontal_guides_ = [250.0, -250.0, -100.0, 100.0]
+
+[node name="Objects" type="Node2D" parent="." unique_id=1571489263]
+
+[node name="Soft" type="Node2D" parent="Objects" unique_id=201616509]
+
+[node name="Ball3" parent="Objects/Soft" unique_id=1417963714 instance=ExtResource("1_805pq")]
+position = Vector2(-148, 146)
+physics_material_override = SubResource("PhysicsMaterial_aq65u")
+
+[node name="Hard" type="Node2D" parent="Objects" unique_id=908867921]
+
+[node name="Box" parent="Objects/Hard" unique_id=169278402 instance=ExtResource("2_ki8mi")]
+position = Vector2(153, -144)
+physics_material_override = SubResource("PhysicsMaterial_irbrv")
+
+[node name="People" type="Node2D" parent="." unique_id=346639341]

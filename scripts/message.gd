@@ -39,6 +39,16 @@ func _ready() -> void:
 				MessageData.new('You\'re not alone,\nhelp him!', 0.5, 2.0, 0.5)
 			], 0.0)
 		5:
+			queue_free()
+		6:
+			queue_free()
+		7:
+			queue_free()
+		8:
+			queue_free()
+		9:
+			queue_free()
+		10:
 			show_messages([
 				MessageData.new('Thanks for playing!', 0.5, 1000.0, 0.5)
 			], 0.0)

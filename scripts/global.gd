@@ -15,7 +15,12 @@ const ALTITUDES := {
 	2: 2000.0,
 	3: 3000.0,
 	4: 3000.0,
-	5: 10000.0
+	5: 3500.0,
+	6: 2500.0,
+	7: 4000.0,
+	8: 3000.0,
+	9: 7000.0,
+	10: 10000.0
 }
 
 const PersonExplosionScene := preload('res://scenes/person_explosion.tscn')
