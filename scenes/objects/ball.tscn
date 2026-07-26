@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://dqoe5d1iub1x" path="res://scripts/ball.gd" id="1_12lam"]
 [ext_resource type="Texture2D" uid="uid://dwldjisfq2jps" path="res://assets/graphics/objects/ball.png" id="1_itkb2"]
 [ext_resource type="Shader" uid="uid://d0japmm85m7wl" path="res://shaders/outline.gdshader" id="2_aaoto"]
-[ext_resource type="AudioStream" uid="uid://dlqoydikmtlxv" path="res://assets/audio/bounce_1.wav" id="3_bounce"]
+[ext_resource type="AudioStream" uid="uid://dlqoydikmtlxv" path="res://assets/audio/bounce.wav" id="3_bounce"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ball"]
 resource_local_to_scene = true
