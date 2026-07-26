@@ -4,7 +4,7 @@ signal fall_ended
 
 const SPEED := 300.0
 const PIXEL_PER_METER := 1
-const DEATH_SPEED := 100.0
+const DEATH_SPEED := 350.0
 const SUCCESS_COLOR := Color('#09d37c')
 const FAIL_COLOR := Color('#d32940')
 const TRANSITION_COVER_TIME := 0.5

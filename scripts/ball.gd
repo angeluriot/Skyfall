@@ -13,6 +13,7 @@ var selected: bool = false
 @export var push_volume_db: float = -30.0;
 
 var last_speed: float = 0.0
+var last_velocity_y: float = 0.0
 
 @onready var rotation_speed: float = Utils.get_rotation_speed(min_default_rotation_speed, max_default_rotation_speed)
 @onready var sprite := $Sprite2D as Sprite2D
@@ -42,6 +43,7 @@ func play_push_sound() -> void:
 
 func _physics_process(_delta: float) -> void:
 	last_speed = linear_velocity.length()
+	last_velocity_y = linear_velocity.y
 
 	if not selected and not Global.has_fall_ended:
 		apply_torque(rotation_speed)
