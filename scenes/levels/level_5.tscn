@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://du8nrqhjnf1qw"]
+
+[node name="Entities" type="Node2D" unique_id=1311857949]
+metadata/_edit_vertical_guides_ = [-250.0, 250.0, -150.0, 150.0]
+metadata/_edit_horizontal_guides_ = [250.0, -250.0, -100.0, 100.0]
+
+[node name="Objects" type="Node2D" parent="." unique_id=1571489263]
+
+[node name="Soft" type="Node2D" parent="Objects" unique_id=201616509]
+
+[node name="Hard" type="Node2D" parent="Objects" unique_id=908867921]
+
+[node name="People" type="Node2D" parent="." unique_id=346639341]

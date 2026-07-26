@@ -38,6 +38,10 @@ func _ready() -> void:
 			show_messages([
 				MessageData.new('You\'re not alone,\nhelp him!', 0.5, 2.0, 0.5)
 			], 0.0)
+		5:
+			show_messages([
+				MessageData.new('Thanks for playing!', 0.5, 1000.0, 0.5)
+			], 0.0)
 
 
 func show_messages(messages: Array[MessageData], gap: float) -> void:

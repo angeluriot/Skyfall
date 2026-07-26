@@ -14,10 +14,11 @@ const ALTITUDES := {
 	1: 2500.0,
 	2: 2000.0,
 	3: 3000.0,
-	4: 3000.0
+	4: 3000.0,
+	5: 10000.0
 }
 
-var current_level := 1
+var current_level := 4
 var altitude: float = ALTITUDES[current_level]
 var max_altitude := altitude
 var has_fall_ended := false
